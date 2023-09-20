@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>EnergiaInVista</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <img src="icon.png" alt="Icona" class="icon">
+            <h1>EnergiaInVista</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="casella"><a href="index.html">Home</a></li>
+                <li class="casella dropdown">
+                    <a href="elettrodomestici.html">Elettrodomestici</a>
+                    <div class="dropdown-content">
+                        <a href="#">Elemento 1</a>
+                        <a href="#">Elemento 2</a>
+                        <a href="#">Elemento 3</a>
+                        <a href="#">Elemento 4</a>
+                        <a href="#">Elemento 5</a>
+                        <a href="#">Elemento 6</a>
+                    </div>
+                </li>
+                <li class="casella dropdown" id="profile-link">
+                    <a href="#" id="login-link">Login</a>
+                    <span id="hide" style="visibility: hidden;">
+                        <div class="dropdown-content" style="min-width: auto;">
+                            <a href="#">Info</a>
+                            <button id="logout-button">Logout</button>
+                            <!--a href="#logout-button" id="logout-link">Logout</a-->
+                        </div>
+                    </span>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="login">
+            <h2>Effettua il login</h2>
+            <form>
+                <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                <input type="text" id="cognome" name="cognome" placeholder="Cognome" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Accedi</button>
+            </form>
+        </section>
+        <div id="logged-in-content" style="display: none;">
+            <!-- Inserisci qui il contenuto dopo il login -->
+            <h2>Benvenuto, <span id="logged-in-name"></span>!</h2>
+            
+            <!--aggiungere un counter dei dispositivi che si aggiorna ogni volta che se ne inserisce uno-->
+            <div class="device-form">
+                <h3>Inserisci i dati del tuo dispositivo</h3>
+                <form id="device-form">
+                    <div class="form-group">
+                        <label for="marca">Marca:</label>
+                        <select id="marca" name="marca">
+                            <option value="marca1">Marca 1</option>
+                            <option value="marca2">Marca 2</option>
+                            <option value="marca3">Marca 3</option>
+                            <option value="marca4">Marca 4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modello">Modello:</label>
+                        <select id="modello" name="modello">
+                            <option value="modello1">Modello 1</option>
+                            <option value="modello2">Modello 2</option>
+                            <option value="modello3">Modello 3</option>
+                            <option value="modello4">Modello 4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="potenza">Potenza:</label>
+                        <select id="potenza" name="potenza">
+                            <option value="potenza1">Potenza 1</option>
+                            <option value="potenza2">Potenza 2</option>
+                            <option value="potenza3">Potenza 3</option>
+                            <option value="potenza4">Potenza 4</option>
+                        </select>
+                    </div>
+                    <button type="submit">Invia</button>
+                </form>
+            </div>
+
+            <div class="my-devices">
+                <h3>I Miei Dispositivi</h3>
+                <div class="info-container">
+                    <div id="info-icon" class="circle">
+                        <span id="info-icon-content" class="tooltip-trigger">ℹ️</span>
+                        <span class="info-label">Istruzioni</span>
+                    </div>
+                </div>
+
+                <div id="card-container"></div>
+            </div>
+            <!-- Aggiungi il link di logout >
+            <button id="logout-button">Logout</button-->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 EnergiaInVista. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

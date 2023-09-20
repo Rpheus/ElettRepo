@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Caricamento degli Elettrodomestici su Database </title>
+</head>
+
+<body>
+	<input type="text" id="inputTipol" placeholder="Tipologia (es. &rdquo;Lavatrice&rdquo;)">
+	<input type="text" id="inputMarca" placeholder="Marca (es. &rdquo;Bosch&rdquo;)">
+	<input type="text" id="inputModel" placeholder="Modello (es. &rdquo;WN44G291&rdquo;)">
+	<input type="number" id="inputPoten" placeholder="Potenza standard (in watt/ora)">
+	<input type="number" id="inputPoEco" placeholder="Potenza eco (in watt/ora)">
+	<input type="number" id="inputPoSec" placeholder="Potenza altro (in watt/ora)">
+
+	<button onclick="caricaDati()"> Carica dati </button>
+	<script>
+		function caricaDati() {
+			var jsTipol = document.getElementById("inputTipol").value;
+			var jsMarca = document.getElementById("inputMarca").value;
+			var jsModel = document.getElementById("inputModel").value;
+			var jsPoten = document.getElementById("inputPoten").value;
+			var jsPoEco = document.getElementById("inputPoEco").value;
+			var jsPoSec = document.getElementById("inputPoSec").value;
+			fetch('/ricevi', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({"Tipologia": jsTipol, "Marca": jsMarca, "Modello": jsModel, "Potenza": jsPoten, "PotenzaEco": jsPoEco, "PotenzaSec": jsPoSec})
+			})
+				.then(response => response.text())
+				.then(data => {
+					console.log("risposta dal server:" + data);
+				})
+				.catch(error => {
+					console.error("Errore nella richiesta:" + error);
+				});
+		}  
+	</script>
+</body>
+
+</html>
+
+<!--"<!DOCTYPE html> \r\n"+
+//				"<html> \r\n"+
+//				"<head> \r\n"+
+//				"<title> Caricamento degli Elettrodomestici su  Database </title> \r\n"+
+//				"</head> \r\n"+
+//				"<body> \r\n"+
+//				"<input type=\"text\" id=\"inputTipol\" placeholder=\"Tipologia (es. &rdquo;Lavatrice&rdquo;)\"> \r\n"+
+//				"<input type=\"text\" id=\"inputMarca\" placeholder=\"Marca (es. &rdquo;Bosch&rdquo;)\"> \r\n"+
+//				"<input type=\"text\" id=\"inputModel\" placeholder=\"Modello (es. &rdquo;WN44G291&rdquo;)\"> \r\n"+
+//				"<input type=\"number\" id=\"inputPoten\" placeholder=\"Potenza standard (in watt/ora)\"> \r\n"+
+//				"<input type=\"number\" id=\"inputPoEco\" placeholder=\"Potenza eco (in watt/ora)\"> \r\n"+
+//				"<input type=\"number\" id=\"inputPoSec\" placeholder=\"Potenza altro (in watt/ora)\"> \r\n"+
+//				
+//				"<button onclick=\"caricaDati()\"> Carica dati </button> \r\n"+
+//				"<script> \r\n"+
+//				"function caricaDati(){ \r\n"+
+//				"var jsTipol = document.getElementById(\"inputTipol\").value; \r\n"+
+//				"var jsMarca = document.getElementById(\"inputMarca\").value; \r\n"+
+//				"var jsModel = document.getElementById(\"inputModel\").value; \r\n"+
+//				"var jsPoten = document.getElementById(\"inputPoten\").value; \r\n"+
+//				"var jsPoEco = document.getElementById(\"inputPoEco\").value; \r\n"+
+//				"var jsPoSec = document.getElementById(\"inputPoSec\").value; \r\n"+
+//				"fetch('/ricevi',{ \r\n"+
+//				"method: 'POST', \r\n"+
+//				"headers: { \r\n"+
+//				" 'Content-Type': 'application/json' \r\n"+
+//				"}, \r\n"+
+//				" body: JSON.stringify({\"Tipologia\":jsTipol,\"Marca\":jsMarca,\"Modello\":jsModel,\"Potenza\":jsPoten,\"PotenzaEco\":jsPoEco,\"PotenzaSec\":jsPoSec}) \r\n"+
+//				"}) \r\n"+
+//				".then(response=>response.text()) \r\n"+
+//				".then(data=>{ \r\n"+
+//				"console.log(\"risposta dal server:\"+data); \r\n"+
+//				"}) \r\n"+
+//				".catch(error =>{ \r\n"+
+//				"console.error(\"Errore nella richiesta:\"+error); \r\n"+
+//				"});} \r\n"+
+//				"</script> \r\n"+
+//				"</body> \r\n"+
+//				"</html>"; -->

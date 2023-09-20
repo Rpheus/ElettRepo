@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/10df6efe8e.js" crossorigin="anonymous"></script>
+    <title>EnergiaInVista</title>
+
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <img src="icon.png" alt="Icona" class="icon">
+            <h1>EnergiaInVista</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Cerca Elettrodomestico">
+            <button id="search-button" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+        <nav>
+            <ul>
+                <li class="casella"><a href="index.html">Home</a></li>
+                <li class="casella">
+                    <a href="elettrodomestici.html">Elettrodomestici</a>
+                </li>
+                <li class="casella"><a href="login.html" id="login-link">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Div contenente un titolo, un'immagine e una descrizione a destra -->
+    <div class="my-devices">
+        <div id="card-container"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 EnergiaInVista. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+<script>
+
+    const immaginiTitoli = {
+        "Asciugacapelli": "icone/airdryer.png",
+        "Condizionatore": "icone/conditioner_round.png",
+        "Lavastoviglie": "icone/dishwasher_round.png",
+        "Forno a Microonde": "icone/microwave_square.png",
+        "Mixer": "icone/mixer.png",
+        "Monitor": "icone/monitor_round.png",
+        "Forno": "icone/oven_square.png",
+        "PC": "icone/pc_round.png",
+        "Frigorifero": "icone/refrigerator.png",
+        "TV": "icone/tv_round.png",
+        "Aspirapolvere": "icone/vacuumcleaner.png",
+        "Lavatrice": "icone/washingmachine_round.png",
+        "Scaldabagno": "icone/water_heater.png",
+        "Default": "icone/noimage.png"
+    };
+
+    fetch('/stampa')  // '/dati' è l'endpoint dell'API REST
+        .then(response => response.json())
+        .then(data => {
+
+            const array1 = '[]';
+            const array2 = '[]';
+            const array3 = '[]';
+            const array4 = '[]';
+            const array5 = '[]';
+            const array6 = '[]';
+            // Parsa le stringhe JSON in array di oggetti JavaScript.
+            const datiArray1 = JSON.parse(array1);
+            const datiArray2 = JSON.parse(array2);
+            const datiArray3 = JSON.parse(array3);
+            const datiArray4 = JSON.parse(array4);
+            const datiArray5 = JSON.parse(array5);
+            const datiArray6 = JSON.parse(array6);
+
+            // Crea l'array 'database' nel formato desiderato iterando attraverso tutti gli elementi di ogni array.
+            const database = [];
+
+            for (let i = 0; i < Math.max(datiArray1.length, datiArray2.length, datiArray3.length, datiArray4.length, datiArray5.length, datiArray6.length); i++) {
+                const elementoDatabase = {
+                    titolo: datiArray1[i]?.elemento1 || "",
+                    marca: datiArray2[i]?.elemento1 || "",
+                    modello: datiArray3[i]?.elemento1 || "",
+                    potenza: datiArray4[i]?.elemento1 || "",
+                    potenzaEco: datiArray5[i]?.elemento1 || "",
+                    potenzaSec: datiArray6[i]?.elemento1 || ""
+                };
+
+                database.push(elementoDatabase);
+            }
+            console.log(database);
+        })
+        .catch(error => console.error('Errore nella richiesta AJAX: ', error));
+
+
+
+    /*const database = [
+        {
+            titolo: "Asciugacapelli",
+            descrizione: "Asciugacapelli professionale ad alta potenza per asciugare i capelli in pochi minuti."
+        },
+        {
+            titolo: "Condizionatore",
+            descrizione: "Condizionatore d'aria silenzioso ed efficiente per mantenere la tua casa fresca in estate."
+        },
+        {
+            titolo: "Lavastoviglie",
+            descrizione: "Lavastoviglie ad alte prestazioni con programmi di lavaggio personalizzabili per piatti puliti in un attimo."
+        },
+        {
+            titolo: "Forno a Microonde",
+            descrizione: "Forno a microonde compatto con diverse impostazioni di cottura per riscaldare e cuocere i tuoi pasti preferiti."
+        },
+        {
+            titolo: "Mixer",
+            descrizione: "Mixer potente con lame in acciaio inossidabile per preparare frullati e bevande fresche."
+        },
+        {
+            titolo: "Monitor",
+            descrizione: "Monitor ad alta risoluzione con schermo LED per una visualizzazione chiara delle immagini."
+        },
+        {
+            titolo: "Forno",
+            descrizione: "Forno elettrico con funzioni di cottura multiple per preparare deliziosi piatti fatti in casa."
+        },
+        {
+            titolo: "PC",
+            descrizione: "PC desktop veloce e affidabile con un potente processore per multitasking senza problemi."
+        },
+        {
+            titolo: "Frigorifero",
+            descrizione: "Frigorifero spazioso con freezer integrato per conservare gli alimenti freschi per più a lungo."
+        },
+        {
+            titolo: "TV",
+            descrizione: "TV a schermo piatto con una nitida qualità dell'immagine per l'intrattenimento a casa."
+        },
+        {
+            titolo: "Aspirapolvere",
+            descrizione: "Aspirapolvere senza fili leggero e maneggevole per mantenere la tua casa pulita e ordinata."
+        },
+        {
+            titolo: "Lavatrice",
+            descrizione: "Lavatrice professionale con una qualità della pulizia pari al 99%, per tenere sempre freschi i tuoi vestiti."
+        },
+        {
+            titolo: "Scaldabagno",
+            descrizione: "Scaldabagno a gas efficiente ed ecologico per l'acqua calda istantanea in casa tua."
+        },
+        {
+            titolo: "Default",
+            descrizione: "Prodotto non specificato."
+        }
+    ];*/
+
+    document.addEventListener("DOMContentLoaded", function () {
+        creaCardDaDati(database);
+    });
+
+    const searchInput = document.getElementById("search-input");
+
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = database.filter((prodotto) =>
+            prodotto.titolo.toLowerCase().includes(searchTerm)
+        );
+        creaCardDaDati(filteredProducts);
+    });
+
+    // Costante per memorizzare i dati aggiunti alla lista
+    const Dati_Miei = [];
+
+    function creaCardDaDati(dati) {
+        const container = document.getElementById("card-container");
+        container.innerHTML = "";
+
+        for (const elemento of dati) {
+            const card = document.createElement("div");
+
+            // Aggiungi la classe .card-anim alla card per attivare l'animazione CSS
+            card.classList.add("card", "card-anim");
+
+            const immagine = document.createElement("img");
+            immagine.alt = elemento.titolo;
+
+            // Verifica se c'è una corrispondenza di immagine per il titolo
+            if (elemento.titolo in immaginiTitoli) {
+                immagine.src = immaginiTitoli[elemento.titolo];
+            } else {
+                // Immagine predefinita se non c'è una corrispondenza
+                immagine.src = "icone/default_square.png";
+            }
+
+            immagine.classList.add("general-icon");
+
+            const titolo = document.createElement("h4");
+            titolo.textContent = elemento.titolo + " " + elemento.marca + " " + elemento.modello;
+
+            const descrizione = document.createElement("p");
+            descrizione.textContent = elemento.descrizione;
+
+            // Bottone "Aggiungi alla lista"
+            const addButton = document.createElement("button");
+            addButton.textContent = "Aggiungi alla lista";
+            addButton.addEventListener("click", function () {
+                aggiungiALista(elemento);
+            });
+
+            card.appendChild(titolo);
+            card.appendChild(immagine);
+            card.appendChild(descrizione);
+            card.appendChild(addButton);
+
+            container.appendChild(card);
+        }
+    }
+
+    // Chiamata alla funzione per creare le card
+    creaCardDaDati(database);
+
+    // Funzione per aggiungere dati alla lista Dati_Miei
+    function aggiungiALista(elemento) {
+        Dati_Miei.push({
+            titolo: elemento.titolo,
+            immagine: elemento.immagine,
+            descrizione: elemento.descrizione,
+        });
+
+        // Puoi fare qualcosa con i dati aggiunti, ad esempio visualizzarli o elaborarli ulteriormente.
+        console.log("Dati aggiunti alla lista:", Dati_Miei);
+    }
+</script>
+
+</html>
