@@ -24,8 +24,8 @@ public class Controller {
 	
 	@RequestMapping("/loadElet")
 	public String index() {
-		return "<script> location.href = \"login.html\" </script>";
-		// return "<script> location.href = \"caricamentoElettrodomestici.html\" </script>";
+		// "<script> location.href = \"login.html\" </script>";
+		return "<script> location.href = \"caricamentoElettrodomestici.html\" </script>";
 		
 //		return "<!DOCTYPE html> \r\n" +
 //		"<html lang=\"it\"> \r\n" +
